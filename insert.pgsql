@@ -1,7 +1,6 @@
 
 -- RESTART SERIAL FIELDS FOR TESTING
 
-/*
 ALTER SEQUENCE "course_offering_sec_id_seq" RESTART;
 
 ALTER SEQUENCE "enrols_sec_id_seq" RESTART;
@@ -12,13 +11,11 @@ ALTER SEQUENCE "teaches_sec_id_seq" RESTART;
 DROP SEQUENCE IF EXISTS "course_id_seq" CASCADE;
 DROP SEQUENCE IF EXISTS "student_id_seq" CASCADE;
 
-
-
 -- DELETE RECORDS FOR TESTING
 
 TRUNCATE  "student","instructor","course","course_offering", "enrols", "teaches", "requires" CASCADE;
 
-*/
+
 /* Insert student values*/
 INSERT INTO student (name,program)
 VALUES
@@ -28,8 +25,8 @@ VALUES
   ('Reese Woodard','CS'),
   ('Igor Smith','Electrical Engineering');
 
-
 SELECT * FROM "student";
+
 /* Insert instructor values*/
 
 INSERT INTO instructor (instructor_id, name, dept, title) 
@@ -40,6 +37,7 @@ VALUES
     (3772342, 'Rossy', 'Accounting', 'Assistant Professor'),
     (0974263, 'Jarrett', 'Product Management', 'Desktop Support Technician');
 
+SELECT * FROM "instructor";
 
 /* Insert course values*/
 INSERT INTO course (title,syllabus,credits)
@@ -50,7 +48,7 @@ VALUES
   ('Sport','pensum 2020',3),
   ('Complexity','pensum 2020',4);
 
-
+SELECT * FROM "course";
 /* Insert course_offering*/
 
 INSERT INTO course_offering (course_id,year,semester,time,classroom)
@@ -60,6 +58,8 @@ VALUES
   (837873,'2022-01-10',7,'11:11 AM','240a'),
   (837896,'2022-01-10',6,'12:01 AM','240Bx'),
   (837919, '2022-01-03',3,'4:23 PM','240Bd');
+
+  SELECT * FROM "course_offering";
 
 /* Insert enrols*/
 
@@ -71,6 +71,7 @@ VALUES
   (7992,837896 ,6,'2022-01-10',3.23),
   (8160, 837919,3,'2022-01-10',1.19);
 
+  SELECT * FROM "enrols";
 /* Insert teaches*/
 INSERT INTO teaches (course_id,semester,year,instructor_id)
 VALUES
@@ -80,6 +81,7 @@ VALUES
   (837896,6,'2022-01-10',3772342),
   (837919,3,'2022-01-10',0974263);
 
+ SELECT * FROM "teaches";
 /* Insert requires*/
 INSERT INTO requires (main_course,prerequisite)
 VALUES
@@ -89,12 +91,5 @@ VALUES
   (837873, 837919),
   (837919, 837873);
 
-  -- SELECT FOR CHECK THE CONTENT OF EACH TABLE TESTING
-
-SELECT * FROM "student";
-SELECT * FROM "instructor";
-SELECT * FROM "course";
-SELECT * FROM "course_offering";
-SELECT * FROM "enrols";
-SELECT * FROM "teaches";
 SELECT * FROM "requires";
+-- SELECT FOR CHECK THE CONTENT OF EACH TABLE TESTING
