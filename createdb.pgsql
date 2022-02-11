@@ -73,3 +73,32 @@ CREATE TABLE enrols(
         REFERENCES course(course_id),
     PRIMARY KEY(student_id,course_id, sec_id , semester,year)
 );
+
+/* Table teaches */
+CREATE TABLE teaches(
+    course_id INT NOT NULL,
+    sec_id serial NOT NULL,
+    semester INT NOT NULL,
+    year date NOT NULL,
+    instructor_id INT,
+    CONSTRAINT "FK_teaches.course_id"
+      FOREIGN KEY (course_id)
+        REFERENCES course(course_id),
+    CONSTRAINT "FK_teaches.instructor_id"
+      FOREIGN KEY (instructor_id)
+        REFERENCES instructor(instructor_id),
+    PRIMARY KEY(course_id,sec_id, semester , year,instructor_id)
+);
+
+/* Table requires */
+CREATE TABLE requires(
+    main_course INT NOT NULL,
+    prerequisite INT NOT NULL,
+    CONSTRAINT "FK_requires.main_course"
+      FOREIGN KEY (main_course)
+        REFERENCES course(course_id),
+    CONSTRAINT "FK_requires.prerequisite"
+      FOREIGN KEY (prerequisite)
+        REFERENCES course(course_id),
+    PRIMARY KEY(main_course,prerequisite)
+);
