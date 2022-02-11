@@ -1,10 +1,15 @@
-/* Dropping tables for testing*/ 
+/* Dropping tables for testing */
 
 DROP SEQUENCE IF EXISTS "student_id_seq" CASCADE;
 DROP TABLE IF EXISTS "student" CASCADE;
 DROP TABLE IF EXISTS "instructor" CASCADE;
 DROP SEQUENCE IF EXISTS "course_id_seq" CASCADE;
 DROP TABLE IF EXISTS "course" CASCADE;
+DROP TABLE IF EXISTS "course_offering" CASCADE;
+DROP TABLE IF EXISTS "enrols" CASCADE;
+DROP TABLE IF EXISTS "teaches" CASCADE;
+DROP TABLE IF EXISTS "requires" CASCADE;
+ 
 
 /* Table Student */
 CREATE SEQUENCE student_id_seq
@@ -12,7 +17,7 @@ INCREMENT 168
 START 7488;
 
 CREATE TABLE student(
-    student_id INT DEFAULT nextval('student_id_seq'),
+    student_id INT DEFAULT nextval(student_id_seq),
     name varchar(50) NOT NULL,
     program varchar(50) NOT NULL,
     PRIMARY KEY(student_id)
@@ -43,12 +48,12 @@ CREATE TABLE course(
 
 /* Table course_offering */
 CREATE TABLE course_offering(
-    course_id INT NOT NULL,
-    sec_id serial NOT NULL,
-    year date NOT NULL,
-    semester INT NOT NULL,
+    course_id INT,
+    sec_id serial,
+    year date,
+    semester INT,
     time time NOT NULL,
-    classroom varchar(50)NOT NULL,
+    classroom varchar(50) NOT NULL,
     CONSTRAINT "FK_course_offering.course_id"
       FOREIGN KEY (course_id)
         REFERENCES course(course_id),
@@ -58,17 +63,16 @@ CREATE TABLE course_offering(
 
 /* Table enrols */
 CREATE TABLE enrols(
-    student_id INT NOT NULL,
-    course_id INT NOT NULL,
-    sec_id serial NOT NULL,
-    year date NOT NULL,
-    semester INT NOT NULL,
-    year date NOT NULL,
+    student_id INT,
+    course_id INT,
+    sec_id serial,
+    semester INT,
+    year date,
     grade NUMERIC(3,2) NOT NULL CHECK (grade>1 AND grade<5),
     CONSTRAINT "FK_enrols.student_id"
       FOREIGN KEY (student_id)
         REFERENCES student(student_id),
-    CONSTRAINT "FK_course_offering.course_id"
+    CONSTRAINT "FK_enrols_offering.course_id"
       FOREIGN KEY (course_id)
         REFERENCES course(course_id),
     PRIMARY KEY(student_id,course_id, sec_id , semester,year)
@@ -76,10 +80,10 @@ CREATE TABLE enrols(
 
 /* Table teaches */
 CREATE TABLE teaches(
-    course_id INT NOT NULL,
-    sec_id serial NOT NULL,
-    semester INT NOT NULL,
-    year date NOT NULL,
+    course_id INT,
+    sec_id serial,
+    semester INT,
+    year date,
     instructor_id INT,
     CONSTRAINT "FK_teaches.course_id"
       FOREIGN KEY (course_id)
@@ -92,8 +96,8 @@ CREATE TABLE teaches(
 
 /* Table requires */
 CREATE TABLE requires(
-    main_course INT NOT NULL,
-    prerequisite INT NOT NULL,
+    main_course INT,
+    prerequisite INT,
     CONSTRAINT "FK_requires.main_course"
       FOREIGN KEY (main_course)
         REFERENCES course(course_id),
