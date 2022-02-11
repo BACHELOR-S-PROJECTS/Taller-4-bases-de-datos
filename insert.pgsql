@@ -107,6 +107,19 @@ CREATE TABLE requires(
     PRIMARY KEY(main_course,prerequisite)
 );
 
+ALTER SEQUENCE "course_offering_sec_id_seq" RESTART;--funciona sin esto
+
+ALTER SEQUENCE "enrols_sec_id_seq" RESTART;--funciona sin esto
+
+ALTER SEQUENCE "teaches_sec_id_seq" RESTART;--funciona sin esto
+
+--esto da el error de null
+--DROP SEQUENCE IF EXISTS "course_id_seq" CASCADE;
+--DROP SEQUENCE IF EXISTS "student_id_seq" CASCADE;
+
+TRUNCATE "student","instructor","course","course_offering", "enrols", "teaches", "requires" CASCADE;--funciona sin esto
+
+
 
 INSERT INTO student (name,program)
 VALUES
