@@ -77,7 +77,6 @@ INSERT INTO requires (main_course,prerequisite)
 VALUES
   (837827, 837850),
   (837919, 837896),
-  /*(837827, 837850),ERROR: duplicate key value violates unique constraint "requires_pkey" DETAIL: Key (main_course, prerequisite)=(837827, 837850) already exists.*/
   (837850, 837827),
   (837873, 837919),
   (837919, 837873);
