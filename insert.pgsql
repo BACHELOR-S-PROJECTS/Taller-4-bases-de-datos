@@ -1,7 +1,7 @@
 
 -- RESTART SERIAL FIELDS FOR TESTING
 
-
+/*
 ALTER SEQUENCE "course_offering_sec_id_seq" RESTART;
 
 ALTER SEQUENCE "enrols_sec_id_seq" RESTART;
@@ -18,9 +18,9 @@ DROP SEQUENCE IF EXISTS "student_id_seq" CASCADE;
 
 TRUNCATE  "student","instructor","course","course_offering", "enrols", "teaches", "requires" CASCADE;
 
-
+*/
 /* Insert student values*/
-INSERT INTO student
+INSERT INTO student (name,program)
 VALUES
   ('Noah Cotton','Math'),
   ('Deborah Ewing','physics'),
@@ -28,6 +28,8 @@ VALUES
   ('Reese Woodard','CS'),
   ('Igor Smith','Electrical Engineering');
 
+
+SELECT * FROM "student";
 /* Insert instructor values*/
 
 INSERT INTO instructor (instructor_id, name, dept, title) 
@@ -47,6 +49,7 @@ VALUES
   ('Databases','pensum 2010',4),
   ('Sport','pensum 2020',3),
   ('Complexity','pensum 2020',4);
+
 
 /* Insert course_offering*/
 

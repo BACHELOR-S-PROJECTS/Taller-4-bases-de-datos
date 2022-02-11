@@ -17,7 +17,7 @@ INCREMENT 168
 START 7488;
 
 CREATE TABLE student(
-    student_id INT DEFAULT nextval(student_id_seq),
+    student_id INT DEFAULT nextval('student_id_seq'),
     name varchar(50) NOT NULL,
     program varchar(50) NOT NULL,
     PRIMARY KEY(student_id)
