@@ -1,4 +1,7 @@
+--CREATE DATABASE university;
+
 /* Dropping tables for testing */
+
 
 DROP SEQUENCE IF EXISTS "student_id_seq" CASCADE;
 DROP TABLE IF EXISTS "student" CASCADE;
@@ -50,7 +53,7 @@ CREATE TABLE course(
 CREATE TABLE course_offering(
     course_id INT,
     sec_id serial,
-    year INT,
+    year date,
     semester INT,
     time time NOT NULL,
     classroom varchar(50) NOT NULL,
@@ -67,7 +70,7 @@ CREATE TABLE enrols(
     course_id INT,
     sec_id serial,
     semester INT,
-    year INT,
+    year date,
     grade NUMERIC(3,2) NOT NULL CHECK (grade>1 AND grade<5),
     CONSTRAINT "FK_enrols.student_id"
       FOREIGN KEY (student_id)
@@ -83,7 +86,7 @@ CREATE TABLE teaches(
     course_id INT,
     sec_id serial,
     semester INT,
-    year INT,
+    year date,
     instructor_id INT,
     CONSTRAINT "FK_teaches.course_id"
       FOREIGN KEY (course_id)

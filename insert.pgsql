@@ -9,7 +9,7 @@ ALTER SEQUENCE "course_id_seq" RESTART;
 --esto da el error de null
 --DROP SEQUENCE IF EXISTS "course_id_seq" CASCADE;
 --DROP SEQUENCE IF EXISTS "student_id_seq" CASCADE;
-TRUNCATE "student","instructor","course","course_offering", "enrols", "teaches", "requires" CASCADE;--funciona sin esto
+TRUNCATE "student","instructor","course","course_offering", "enrols", "teaches", "requires" CASCADE;
 
 
 
@@ -45,31 +45,31 @@ SELECT * FROM "course";
 
 INSERT INTO course_offering (course_id,year,semester,time,classroom)
 VALUES
-  (837827, 1902,7,'11:53 PM','240B'),
-  (837850, 1897,2,'4:58 PM','240c'),
-  (837873,1902,7,'11:11 AM','240a'),
-  (837896,1901,6,'12:01 AM','240Bx'),
-  (837919, 1898,3,'4:23 PM','240Bd');
+  (837827, '1937-01-08',7,'11:53 PM','240B'),
+  (837850,'2018-01-02',2,'4:58 PM','240c'),
+  (837873,'2022-01-10',7,'11:11 AM','240a'),
+  (837896,'2020-01-10',6,'12:01 AM','240Bx'),
+  (837919, '1973-01-03',3,'4:23 PM','240Bd');
 
 SELECT * FROM "course_offering";
 
 INSERT INTO enrols (student_id,course_id,semester,year,grade)
 VALUES
-  (7488,837827,7,1902, 4.23),
-  (7656, 837850,2,1897,4.56),
-  (7824,837873 ,7,1902,2.9),
-  (7992,837896 ,6,1901,3.23),
-  (8160, 837919,3,1898,1.19);
+  (7488,837827,1,'1973-01-10', 4.23),
+  (7656, 837850,2,'2017-01-10',4.56),
+  (7824,837873 ,1,'2022-01-10',2.9),
+  (7992,837896 ,2,'2017-01-10',3.23),
+  (8160, 837873,1,'1973-01-10',1.19);
 
 SELECT * FROM "enrols";
  
 INSERT INTO teaches (course_id,semester,year,instructor_id)
 VALUES
-  (837827,7,1902,8813011),
-  (837850,2,1897,3707630),
-  (837873,7,1902,1169176),
-  (837896,6,1901,3772342),
-  (837919,3,1898,0974263);
+  (837827,7,'1937-01-10',8813011),
+  (837850,2,'2018-01-10',3707630),
+  (837873,7,'2022-01-10',1169176),
+  (837896,6,'2020-01-10',3772342),
+  (837919,3,'1973-01-10',0974263);
 
 SELECT * FROM "teaches";
 
