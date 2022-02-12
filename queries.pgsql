@@ -16,7 +16,7 @@ SELECT name, grade, semester, year FROM
 (SELECT e.student_id, e.grade, e.semester, e.year FROM
 (SELECT max(grade) AS grade1, semester, year
 FROM student s INNER JOIN enrols e ON s.student_id = e.student_id
-WHERE year >= to_date('1900', 'YYYY') AND year <= to_date('2018', 'YYYY')
+WHERE year >= 1900 AND year <= 2018
 GROUP by semester,year)
 AS a LEFT JOIN enrols e ON (a.year = e.year AND a.grade1 = e.grade AND a.semester = e.semester))
 AS best_student_id
