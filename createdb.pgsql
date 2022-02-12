@@ -54,7 +54,7 @@ CREATE TABLE course_offering(
     course_id INT,
     sec_id serial,
     year date,
-    semester INT,
+    semester INT CHECK (semester=1 OR semester=2),
     time time NOT NULL,
     classroom varchar(50) NOT NULL,
     CONSTRAINT "FK_course_offering.course_id"
@@ -69,7 +69,7 @@ CREATE TABLE enrols(
     student_id INT,
     course_id INT,
     sec_id serial,
-    semester INT,
+    semester INT CHECK (semester=1 OR semester=2),
     year date,
     grade NUMERIC(3,2) NOT NULL CHECK (grade>1 AND grade<5),
     CONSTRAINT "FK_enrols.student_id"
