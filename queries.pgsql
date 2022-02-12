@@ -22,4 +22,14 @@ AS a LEFT JOIN enrols e ON (a.year = e.year AND a.grade1 = e.grade AND a.semeste
 AS best_student_id
 INNER JOIN student AS s ON (best_student_id.student_id = s.student_id);
 
+--vista
+--CREATE VIEW better_students AS
+--SELECT student_id,max(grade) FROM
+--(
+    
+    SELECT * FROM enrols INNER JOIN student
+    ON enrols.student_id=student.student_id
+    WHERE year >= 1900 AND year <= 2018)
 
+    
+--) AS year_comparisson
