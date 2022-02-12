@@ -23,10 +23,11 @@ SELECT name, grade, semester, year FROM
 				GROUP by semester,year)
 				AS grade1_semester_year 
  			LEFT JOIN 
- 				enrols e ON (grade1_semester_year.year = e.year AND grade1_semester_year.grade1 = e.grade AND grade1_semester_year.semester = e.semester))
+ 				enrols e 
+		 	ON (grade1_semester_year.year = e.year AND grade1_semester_year.grade1 = e.grade AND grade1_semester_year.semester = e.semester))
 		AS best_student_id_grade_semester_year
 	INNER JOIN 
-    	student AS s 
+    		student AS s 
         ON (best_student_id_grade_semester_year.student_id = s.student_id);
 
 SELECT * from better_students
