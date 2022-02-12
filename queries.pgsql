@@ -12,6 +12,8 @@ SELECT name FROM student s INNER JOIN enrols e ON s.student_id = e.student_id WH
 
 --actividad 3.3.d
 --Cree una vista llamada better_students que presente los estudiantes que obtuvieron las notas más altas por cada semestre entre los años 1900 y 2018
+--Cree una vista llamada better_students que presente los estudiantes que obtuvieron las notas más altas por cada semestre entre los años 1900 y 2018
+CREATE VIEW better_students AS
 SELECT name, grade, semester, year FROM
 (SELECT e.student_id, e.grade, e.semester, e.year FROM
 (SELECT max(grade) AS grade1, semester, year
@@ -22,6 +24,7 @@ AS a LEFT JOIN enrols e ON (a.year = e.year AND a.grade1 = e.grade AND a.semeste
 AS best_student_id
 INNER JOIN student AS s ON (best_student_id.student_id = s.student_id);
 
+/*
 --vista
 --CREATE VIEW better_students AS
 --SELECT student_id,max(grade) FROM
@@ -33,3 +36,4 @@ INNER JOIN student AS s ON (best_student_id.student_id = s.student_id);
 
     
 --) AS year_comparisson
+*/
