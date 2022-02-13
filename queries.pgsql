@@ -37,16 +37,3 @@ SELECT name, grade, semester, year FROM
 
 SELECT * from better_students
 
-/*
---vista
---CREATE VIEW better_students AS
---SELECT student_id,max(grade) FROM
---(
-    
-    SELECT * FROM enrols INNER JOIN student
-    ON enrols.student_id=student.student_id
-    WHERE year >= 1900 AND year <= 2018)
-
-    
---) AS year_comparisson
-*/

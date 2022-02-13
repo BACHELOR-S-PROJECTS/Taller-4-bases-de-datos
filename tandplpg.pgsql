@@ -73,9 +73,6 @@ CREATE PROCEDURE create_teaches(instructor_idp INT, course_idp INT)
     BEGIN
         IF EXISTS(SELECT * FROM course WHERE course_id=course_idp) AND EXISTS(SELECT * FROM instructor WHERE instructor_id=instructor_idp) THEN
             BEGIN
-                --DECLARE sec_idp INT DEFAULT (SELECT sec_id FROM course_offering WHERE course_id=course_idp);
-                --DECLARE yearp INT DEFAULT (SELECT year FROM course_offering WHERE course_id=course_idp);
-                --DECLARE semesterp INT DEFAULT (SELECT semester FROM course_offering WHERE course_id=course_idp);
                 INSERT INTO teaches (course_id,sec_id,semester,year,instructor_id) 
                     VALUES(course_idp,
                             (SELECT sec_id FROM course_offering WHERE course_id=course_idp),
@@ -93,6 +90,7 @@ $create_teaches$ LANGUAGE plpgsql;
 /*TEST
 SELECT * FROM course_offering;
 SELECT * FROM teaches;
-CALL create_teaches(3707630,837827);
+CALL create_teaches(1169176,837919);
 SELECT * FROM teaches;
 */
+
