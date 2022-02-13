@@ -27,7 +27,7 @@ VALUES
 --4.a.ii - Durante la actualización de un registro si el valor grade es modificado, usando RAISE NOTICE se debe presentar un mensaje indicando el cambio, 
 -- si es igual al valor grade en la tabla se debe indicar que el valor no ha sido modificado. Si el grade a actualizar es negativo, cero o mayor de cinco use RAISE EXCEPTION.
 
-DROP TRIGGER if EXISTS grade_check_up ON enrols;
+DROP TRIGGER IF EXISTS grade_check_up ON enrols;
 
 CREATE OR REPLACE FUNCTION grade_check2() 
     RETURNS TRIGGER AS $grade_check2$
@@ -65,23 +65,34 @@ SELECT * FROM enrols;
 
 --i.  Este procedimiento debe verificar que el curso exista en la oferta de cursos.
 -- ii. Use course_id, sec_id, year y semester de la oferta de curso y instructor_id el para insertar en teaches.
-CREATE PROCEDURE create_teaches(instructor_idP INT, course_idP INT)
+
+DROP PROCEDURE IF EXISTS create_teaches(instructor_idp INT, course_idp INT);
+
+CREATE PROCEDURE create_teaches(instructor_idp INT, course_idp INT)
     AS $create_teaches$
     BEGIN
-        IF EXISTS(SELECT * FROM course WHERE course_id=course_idP) AND EXISTS(SELECT * FROM instructor WHERE instructor_id=instructor_idP)
-        THEN
-        BEGIN
-            DECLARE sec_idP INT DEFAULT (SELECT sec_id FROM course_offering WHERE course_id=course_idP);
-            DECLARE yearP INT DEFAULT (SELECT year FROM course_offering WHERE course_id=course_idP);
-            DECLARE semesterP INT DEFAULT (SELECT semester FROM course_offering WHERE course_id=course_idP);
-            INSERT INTO teaches (course_id,sec_id,semester,year,instructor_id) VALUES(course_idP,sec_idP,semesterP,yearP,instructor_idP);
-        END;
+        IF EXISTS(SELECT * FROM course WHERE course_id=course_idp) AND EXISTS(SELECT * FROM instructor WHERE instructor_id=instructor_idp) THEN
+            BEGIN
+                --DECLARE sec_idp INT DEFAULT (SELECT sec_id FROM course_offering WHERE course_id=course_idp);
+                --DECLARE yearp INT DEFAULT (SELECT year FROM course_offering WHERE course_id=course_idp);
+                --DECLARE semesterp INT DEFAULT (SELECT semester FROM course_offering WHERE course_id=course_idp);
+                INSERT INTO teaches (course_id,sec_id,semester,year,instructor_id) 
+                    VALUES(course_idp,
+                            (SELECT sec_id FROM course_offering WHERE course_id=course_idp),
+                            (SELECT semester FROM course_offering WHERE course_id=course_idp),
+                            (SELECT year FROM course_offering WHERE course_id=course_idp),
+                            instructor_idp);
+            END;
+        ELSE
+            RAISE EXCEPTION 'No existe o el course_id o el instructor_id';        
         END IF;
-        COMMIT;
+        --COMMIT;
     END;
 $create_teaches$ LANGUAGE plpgsql;
 
---TEST
-CALL create_teaches(8813011,837827);
-
+/*TEST
+SELECT * FROM course_offering;
 SELECT * FROM teaches;
+CALL create_teaches(3707630,837827);
+SELECT * FROM teaches;
+*/
