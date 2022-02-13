@@ -45,9 +45,6 @@ BEGIN
 END;
   $grade_check2$ LANGUAGE plpgsql;
 
---CREATE TRIGGER grade_check_ins AFTER UPDATE ON enrols
-  --  FOR EACH ROW 
-    --    EXECUTE PROCEDURE grade_check2();
 CREATE TRIGGER grade_check_up BEFORE UPDATE ON enrols
     FOR EACH ROW 
         EXECUTE PROCEDURE grade_check2();
