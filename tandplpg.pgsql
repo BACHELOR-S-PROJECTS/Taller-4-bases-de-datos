@@ -33,27 +33,28 @@ DROP TRIGGER if EXISTS grade_check_up ON enrols;
 CREATE OR REPLACE FUNCTION grade_check2() 
     RETURNS TRIGGER AS $grade_check2$
 BEGIN
-    IF NEW.grade <= 0 OR NEW.grade > 5.0 THEN
-        RAISE EXCEPTION 'El valor de grade % es incorrecto o invalido ',NEW.grade;
-    ELSIF NEW.grade = OLD.grade THEN
-        RAISE NOTICE 'El valor de grade % no ha sido modificado porque es igual al anterior ',NEW.grade;
+    IF NEW.grade = OLD.grade THEN
+        RAISE EXCEPTION 'El valor de grade % no ha sido modificado porque es igual al anterior',NEW.grade; 
+    ELSIF NEW.grade <= 0 OR NEW.grade > 5.0 THEN
+        RAISE EXCEPTION 'El valor de grade % es incorrecto o invalido',NEW.grade;
     ELSE
         RAISE NOTICE 'El valor de grade % ha sido modificado',NEW.grade;
+    RETURN NEW;
     END IF;
     RETURN NULL;
 END;
   $grade_check2$ LANGUAGE plpgsql;
 
-CREATE TRIGGER grade_check_ins AFTER UPDATE ON enrols
-    FOR EACH ROW 
-        EXECUTE PROCEDURE grade_check2();
+--CREATE TRIGGER grade_check_ins AFTER UPDATE ON enrols
+  --  FOR EACH ROW 
+    --    EXECUTE PROCEDURE grade_check2();
 CREATE TRIGGER grade_check_up BEFORE UPDATE ON enrols
     FOR EACH ROW 
         EXECUTE PROCEDURE grade_check2();
 
 --Test
 UPDATE enrols
-SET grade=2
+SET grade=3
 WHERE student_id=7656;
 
 SELECT * FROM enrols;
