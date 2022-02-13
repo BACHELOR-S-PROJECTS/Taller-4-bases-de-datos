@@ -26,6 +26,7 @@ VALUES
   
 --4.a.ii - Durante la actualización de un registro si el valor grade es modificado, usando RAISE NOTICE se debe presentar un mensaje indicando el cambio, 
 -- si es igual al valor grade en la tabla se debe indicar que el valor no ha sido modificado. Si el grade a actualizar es negativo, cero o mayor de cinco use RAISE EXCEPTION.
+/*
 DROP TRIGGER if EXISTS grade_check_ins ON enrols;
 DROP TRIGGER if EXISTS grade_check_up ON enrols;
 
@@ -57,5 +58,12 @@ SET grade=2
 WHERE student_id=7656;
 
 SELECT * FROM enrols;
+*/
 
 --4.b
+-- Cree un procedimiento create_teaches que automáticamente agregue un registro a teaches. 
+-- Este recibe dos argumentos un identificador de instructor instructor_id y un identificador de course_id. 
+-- Se asume que ambos existen en la base de datos. 
+
+--i.  Este procedimiento debe verificar que el curso exista en la oferta de cursos.
+-- ii. Use curse_id, sec_id, year y semester de la oferta de curso y instructor_id el para insertar en teaches.
