@@ -27,7 +27,6 @@ VALUES
 --4.a.ii - Durante la actualización de un registro si el valor grade es modificado, usando RAISE NOTICE se debe presentar un mensaje indicando el cambio, 
 -- si es igual al valor grade en la tabla se debe indicar que el valor no ha sido modificado. Si el grade a actualizar es negativo, cero o mayor de cinco use RAISE EXCEPTION.
 
-DROP TRIGGER if EXISTS grade_check_ins ON enrols;
 DROP TRIGGER if EXISTS grade_check_up ON enrols;
 
 CREATE OR REPLACE FUNCTION grade_check2() 
@@ -38,10 +37,11 @@ BEGIN
     ELSIF NEW.grade <= 0 OR NEW.grade > 5.0 THEN
         RAISE EXCEPTION 'El valor de grade % es incorrecto o invalido',NEW.grade;
     ELSE
-        RAISE NOTICE 'El valor de grade % ha sido modificado',NEW.grade;
-    RETURN NEW;
+        BEGIN
+            RAISE NOTICE 'El valor de grade % ha sido modificado',NEW.grade;
+            RETURN NEW;
+        END;
     END IF;
-    RETURN NULL;
 END;
   $grade_check2$ LANGUAGE plpgsql;
 
@@ -51,7 +51,7 @@ CREATE TRIGGER grade_check_up BEFORE UPDATE ON enrols
 
 --Test
 UPDATE enrols
-SET grade=3
+SET grade=4
 WHERE student_id=7656;
 
 SELECT * FROM enrols;
