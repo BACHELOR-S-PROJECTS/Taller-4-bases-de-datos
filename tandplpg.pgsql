@@ -84,7 +84,6 @@ CREATE PROCEDURE create_teaches(instructor_idp INT, course_idp INT)
         ELSE
             RAISE EXCEPTION 'No existe o el course_id o el instructor_id';        
         END IF;
-        --COMMIT;
     END;
 $create_teaches$ LANGUAGE plpgsql;
 
