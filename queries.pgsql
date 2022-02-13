@@ -1,3 +1,5 @@
+--Drop view to test
+
 --actividad 3.3.a
 --Encuentre el dept, title de los instructores registrados en la base de datos.
 SELECT dept, title FROM instructor;
@@ -10,6 +12,9 @@ SELECT name, program FROM student WHERE student.student_id = 7656;
 --Encuentre los nombres de todos los estudiantes que se han matriculado en el curso con course_id = 837873
 SELECT name FROM student s INNER JOIN enrols e ON s.student_id = e.student_id WHERE course_id = 837873;
 
+
+--Drop view to test
+DROP VIEW IF EXISTS better_students;
 --actividad 3.3.d
 --Cree una vista llamada better_students que presente los estudiantes que obtuvieron las notas más altas por cada semestre entre los años 1900 y 2018
 --Cree una vista llamada better_students que presente los estudiantes que obtuvieron las notas más altas por cada semestre entre los años 1900 y 2018
