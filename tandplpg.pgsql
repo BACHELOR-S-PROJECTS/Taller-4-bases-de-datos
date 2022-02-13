@@ -3,7 +3,7 @@
 
 --4.a.i - Al agregar una tupla en enrolls, en caso de que la nota sea negativa, cero (0.0) o mayor de 5.00 se debe generar una 
 -- excepción indicando que el valor a guardar en grade es incorrecto o invalido.
-DROP TRIGGER if EXISTS grade_check ON enrols;
+DROP TRIGGER IF EXISTS grade_check ON enrols;
 
 CREATE OR REPLACE FUNCTION grade_check() 
     RETURNS TRIGGER AS $grade_check$
@@ -42,6 +42,7 @@ BEGIN
             RETURN NEW;
         END;
     END IF;
+    RETURN NULL;
 END;
   $grade_check2$ LANGUAGE plpgsql;
 

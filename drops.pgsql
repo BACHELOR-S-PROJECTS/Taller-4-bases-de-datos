@@ -1,3 +1,16 @@
+
+--Borrar disparadores
+DROP TRIGGER IF EXISTS grade_check ON enrols;
+DROP TRIGGER IF EXISTS grade_check_up ON enrols;
+
+--Borrar View
+DROP VIEW IF EXISTS better_students;
+
+--Borrar Procedures
+DROP PROCEDURE IF EXISTS create_teaches(instructor_idp INT, course_idp INT);
+DROP FUNCTION IF EXISTS grade_check();
+DROP FUNCTION IF EXISTS grade_check2();
+
 --Borrar tablas
 --Drop constraints antes de drop tables, porque no puedo usar cascade
 ALTER TABLE course_offering DROP CONSTRAINT "FK_course_offering.course_id";
@@ -17,17 +30,8 @@ DROP TABLE IF EXISTS "enrols";
 DROP TABLE IF EXISTS "teaches";
 DROP TABLE IF EXISTS "requires";
 
+
 -- Borrar registros TRUNCATE "student","instructor","course","course_offering", "enrols", "teaches", "requires" CASCADE;
 --Borrar secuencias
 DROP SEQUENCE IF EXISTS "student_id_seq";
 DROP SEQUENCE IF EXISTS "course_id_seq";
-
---Borrar disparadores
-DROP TRIGGER IF EXISTS grade_check ON enrols;
-DROP TRIGGER IF EXISTS grade_check_up ON enrols;
-
---Borrar View
-DROP VIEW IF EXISTS better_students;
-
---Borrar Procedures
-DROP PROCEDURE IF EXISTS create_teaches(instructor_idp INT, course_idp INT);
