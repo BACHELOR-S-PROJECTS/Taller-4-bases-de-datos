@@ -26,7 +26,7 @@ VALUES
   
 --4.a.ii - Durante la actualización de un registro si el valor grade es modificado, usando RAISE NOTICE se debe presentar un mensaje indicando el cambio, 
 -- si es igual al valor grade en la tabla se debe indicar que el valor no ha sido modificado. Si el grade a actualizar es negativo, cero o mayor de cinco use RAISE EXCEPTION.
-/*
+
 DROP TRIGGER if EXISTS grade_check_ins ON enrols;
 DROP TRIGGER if EXISTS grade_check_up ON enrols;
 
@@ -38,8 +38,7 @@ BEGIN
     ELSIF NEW.grade = OLD.grade THEN
         RAISE NOTICE 'El valor de grade % no ha sido modificado porque es igual al anterior ',NEW.grade;
     ELSE
-        INSERT INTO enrols VALUES(NEW.*);
-    RAISE NOTICE 'El valor de grade % ha sido modificado',NEW.grade;
+        RAISE NOTICE 'El valor de grade % ha sido modificado',NEW.grade;
     END IF;
     RETURN NULL;
 END;
@@ -58,7 +57,7 @@ SET grade=2
 WHERE student_id=7656;
 
 SELECT * FROM enrols;
-*/
+
 
 --4.b
 -- Cree un procedimiento create_teaches que automáticamente agregue un registro a teaches. 
