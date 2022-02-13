@@ -49,12 +49,13 @@ CREATE TRIGGER grade_check_up BEFORE UPDATE ON enrols
     FOR EACH ROW 
         EXECUTE PROCEDURE grade_check2();
 
---Test
+/*Test
 UPDATE enrols
 SET grade=4
 WHERE student_id=7656;
 
 SELECT * FROM enrols;
+*/
 
 
 --4.b
@@ -64,3 +65,4 @@ SELECT * FROM enrols;
 
 --i.  Este procedimiento debe verificar que el curso exista en la oferta de cursos.
 -- ii. Use curse_id, sec_id, year y semester de la oferta de curso y instructor_id el para insertar en teaches.
+CREATE PROCEDURE create_teaches(instructor_id INT)
