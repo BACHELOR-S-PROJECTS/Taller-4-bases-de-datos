@@ -64,12 +64,24 @@ SELECT * FROM enrols;
 -- Se asume que ambos existen en la base de datos. 
 
 --i.  Este procedimiento debe verificar que el curso exista en la oferta de cursos.
--- ii. Use curse_id, sec_id, year y semester de la oferta de curso y instructor_id el para insertar en teaches.
+-- ii. Use course_id, sec_id, year y semester de la oferta de curso y instructor_id el para insertar en teaches.
 CREATE PROCEDURE create_teaches(instructor_idP INT, course_idP INT)
     AS $create_teaches$
     BEGIN
-        IF EXISTS (SELECT * FROM course WHERE course_id=course_idP)
-        INSERT INTO teaches()
+        IF EXISTS(SELECT * FROM course WHERE course_id=course_idP) AND EXISTS(SELECT * FROM instructor WHERE instructor_id=instructor_idP)
+        THEN
+        BEGIN
+            DECLARE sec_idP INT DEFAULT (SELECT sec_id FROM course_offering WHERE course_id=course_idP);
+            DECLARE yearP INT DEFAULT (SELECT year FROM course_offering WHERE course_id=course_idP);
+            DECLARE semesterP INT DEFAULT (SELECT semester FROM course_offering WHERE course_id=course_idP);
+            INSERT INTO teaches (course_id,sec_id,semester,year,instructor_id) VALUES(course_idP,sec_idP,semesterP,yearP,instructor_idP);
+        END;
+        END IF;
         COMMIT;
     END;
 $create_teaches$ LANGUAGE plpgsql;
+
+--TEST
+CALL create_teaches(8813011,837827);
+
+SELECT * FROM teaches;

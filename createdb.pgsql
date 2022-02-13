@@ -85,7 +85,7 @@ CREATE TABLE enrols(
 CREATE TABLE teaches(
     course_id INT,
     sec_id serial,
-    semester INT INT CHECK (semester=1 OR semester=2),
+    semester INT CHECK (semester=1 OR semester=2),
     year INT,
     instructor_id INT,
     CONSTRAINT "FK_teaches.course_id"
