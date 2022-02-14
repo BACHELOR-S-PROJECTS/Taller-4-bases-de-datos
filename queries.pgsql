@@ -17,7 +17,7 @@ SELECT name FROM student s INNER JOIN enrols e ON s.student_id = e.student_id WH
 DROP VIEW IF EXISTS better_students;
 --actividad 3.3.d
 --Cree una vista llamada better_students que presente los estudiantes que obtuvieron las notas más altas por cada semestre entre los años 1900 y 2018
-DROP VIEW if EXISTS better_students;
+
 
 CREATE VIEW better_students AS
 SELECT name, grade, semester, year FROM

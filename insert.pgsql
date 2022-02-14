@@ -6,9 +6,6 @@ ALTER SEQUENCE "enrols_sec_id_seq" RESTART;
 ALTER SEQUENCE "teaches_sec_id_seq" RESTART;
 ALTER SEQUENCE "student_id_seq" RESTART;
 ALTER SEQUENCE "course_id_seq" RESTART;
---esto da el error de null
---DROP SEQUENCE IF EXISTS "course_id_seq" CASCADE;
---DROP SEQUENCE IF EXISTS "student_id_seq" CASCADE;
 TRUNCATE "student","instructor","course","course_offering", "enrols", "teaches", "requires" CASCADE;
 
 --Insercion de tuplas 
